@@ -1,0 +1,191 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: system
+      changes:
+        - insert:
+            tableName: s_role
+            columns:
+              - column:
+                  name: id
+                  valueComputed: 1
+              - column:
+                  name: role_name
+                  value: "ADMIN"
+  - changeSet:
+      id: 2
+      author: system
+      changes:
+        - insert:
+            tableName: s_role
+            columns:
+              - column:
+                  name: id
+                  valueComputed: 2
+              - column:
+                  name: role_name
+                  value: "END"
+
+  - changeSet:
+      id: 3
+      author: system
+      changes:
+        - insert:
+            tableName: s_user
+            columns:
+              - column:
+                  name: id
+                  valueComputed: 1
+              - column:
+                  name: username
+                  value: "ozgurakinci"
+              - column:
+                  name: password
+                  value: "$2a$10$NkH2QXViQRYXD2vVs3dJr.TfGMmP.JiOYK8uQKN5rMkDweIGS5Bl6" #2
+              - column:
+                  name: name
+                  value: "Özgür"
+              - column:
+                  name: surname
+                  value: "Akıncı"
+              - column:
+                  name: address
+                  value:
+              - column:
+                  name: email
+                  value: "akincior@gmail.com"
+              - column:
+                  name: phone
+                  value:
+
+  - changeSet:
+      id: 4
+      author: system
+      changes:
+        - insert:
+            tableName: s_user
+            columns:
+              - column:
+                  name: id
+                  valueComputed: 2
+              - column:
+                  name: username
+                  value: "erdemgunay"
+              - column:
+                  name: password
+                  value: "$2a$10$NkH2QXViQRYXD2vVs3dJr.TfGMmP.JiOYK8uQKN5rMkDweIGS5Bl6" #2
+              - column:
+                  name: name
+                  value: "Erdem"
+              - column:
+                  name: surname
+                  value: "Gunay"
+              - column:
+                  name: address
+                  value:
+              - column:
+                  name: email
+                  value:
+              - column:
+                  name: phone
+                  value:
+
+  - changeSet:
+      id: 5
+      author: system
+      changes:
+        - insert:
+            tableName: s_user
+            columns:
+              - column:
+                  name: id
+                  valueComputed: 3
+              - column:
+                  name: username
+                  value: "enduser"
+              - column:
+                  name: password
+                  value: "$2a$10$NkH2QXViQRYXD2vVs3dJr.TfGMmP.JiOYK8uQKN5rMkDweIGS5Bl6" #2
+              - column:
+                  name: name
+                  value: "End"
+              - column:
+                  name: surname
+                  value: "User"
+              - column:
+                  name: address
+                  value:
+              - column:
+                  name: email
+                  value:
+              - column:
+                  name: phone
+                  value:
+
+  - changeSet:
+      id: 6
+      author: system
+      changes:
+        - insert:
+            tableName: s_user_role
+            columns:
+              - column:
+                  name: id
+                  valueComputed: 1
+              - column:
+                  name: user_id
+                  value: 1
+              - column:
+                  name: role_id
+                  value: 1
+
+  - changeSet:
+      id: 7
+      author: system
+      changes:
+        - insert:
+            tableName: s_user_role
+            columns:
+              - column:
+                  name: id
+                  valueComputed: 2
+              - column:
+                  name: user_id
+                  value: 2
+              - column:
+                  name: role_id
+                  value: 1
+
+  - changeSet:
+      id: 8
+      author: system
+      changes:
+        - insert:
+            tableName: s_user_role
+            columns:
+              - column:
+                  name: id
+                  valueComputed: 3
+              - column:
+                  name: user_id
+                  value: 3
+              - column:
+                  name: role_id
+                  value: 2
+
+  - changeSet:
+      id: 9
+      author: system
+      changes:
+        - insert:
+            tableName: s_user_role
+            columns:
+              - column:
+                  name: id
+                  valueComputed: 4
+              - column:
+                  name: user_id
+                  value: 1
+              - column:
+                  name: role_id
+                  value: 2

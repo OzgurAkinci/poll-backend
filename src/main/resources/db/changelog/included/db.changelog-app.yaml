@@ -1,0 +1,196 @@
+databaseChangeLog:
+  - changeSet:
+      id: poll_seq_create
+      author: system
+      objectQuotingStrategy: LEGACY
+      changes:
+        - createSequence:
+            startValue: 91
+            incrementBy: 1
+            sequenceName: poll_seq
+
+  - changeSet:
+      id: question_seq_create
+      author: system
+      objectQuotingStrategy: LEGACY
+      changes:
+        - createSequence:
+            startValue: 91
+            incrementBy: 1
+            sequenceName: question_seq
+
+  - changeSet:
+      id: option_seq_create
+      author: system
+      objectQuotingStrategy: LEGACY
+      changes:
+        - createSequence:
+            startValue: 91
+            incrementBy: 1
+            sequenceName: option_seq
+  - changeSet:
+      id: response_seq_create
+      author: system
+      objectQuotingStrategy: LEGACY
+      changes:
+        - createSequence:
+            startValue: 91
+            incrementBy: 1
+            sequenceName: response_seq
+
+  - changeSet:
+      id: poll_table_crate
+      author: system
+      changes:
+        - createTable:
+            tableName: poll
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: poll_title
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_by
+                  type: varchar(155)
+              - column:
+                  name: creation_date
+                  type: timestamp
+              - column:
+                  name: last_modified_by
+                  type: varchar(155)
+              - column:
+                  name: last_modified_date
+                  type: timestamp
+  - changeSet:
+      id: question_table_crate
+      author: system
+      changes:
+        - createTable:
+            tableName: question
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: question_title
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: question_type
+                  type: int
+                  constraints:
+                    nullable: false
+                  defaultValue: 0
+              - column:
+                  name: poll_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_question_poll_id
+                    references: poll(id)
+              - column:
+                  name: created_by
+                  type: varchar(155)
+              - column:
+                  name: creation_date
+                  type: timestamp
+              - column:
+                  name: last_modified_by
+                  type: varchar(155)
+              - column:
+                  name: last_modified_date
+                  type: timestamp
+
+  - changeSet:
+      id: option_table_crate
+      author: system
+      changes:
+        - createTable:
+            tableName: option
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: option_title
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: question_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_option_question_id
+                    references: question(id)
+              - column:
+                  name: created_by
+                  type: varchar(155)
+              - column:
+                  name: creation_date
+                  type: timestamp
+              - column:
+                  name: last_modified_by
+                  type: varchar(155)
+              - column:
+                  name: last_modified_date
+                  type: timestamp
+
+  - changeSet:
+      id: response_table_crate
+      author: system
+      changes:
+        - createTable:
+            tableName: response
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_response_s_user_id
+                    references: s_user(id)
+              - column:
+                  name: question_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_response_question_id
+                    references: question(id)
+              - column:
+                  name: response
+                  type: jsonb
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_by
+                  type: varchar(155)
+              - column:
+                  name: creation_date
+                  type: timestamp
+              - column:
+                  name: last_modified_by
+                  type: varchar(155)
+              - column:
+                  name: last_modified_date
+                  type: timestamp

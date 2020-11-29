@@ -1,0 +1,239 @@
+databaseChangeLog:
+  - changeSet:
+      id: poll_table_insert_data_1
+      author: system
+      changes:
+        - insert:
+            tableName: poll
+            columns:
+              - column:
+                  name: id
+                  valueComputed: 1
+              - column:
+                  name: poll_title
+                  value: "The effect of sport on human psychology."
+
+  - changeSet:
+      id: poll_table_insert_data_2
+      author: system
+      changes:
+        - insert:
+            tableName: poll
+            columns:
+              - column:
+                  name: id
+                  valueComputed: 2
+              - column:
+                  name: poll_title
+                  value: "Technological developments impact on transportation."
+
+  - changeSet:
+      id: question_table_insert_data_1
+      author: system
+      changes:
+        - insert:
+            tableName: question
+            columns:
+              - column:
+                  name: id
+                  valueComputed: 1
+              - column:
+                  name: question_title
+                  value: "How does sport affect human psychology?"
+              - column:
+                  name: poll_id
+                  value: 1
+              - column:
+                  name: question_type
+                  value: 0
+
+  - changeSet:
+      id: question_table_insert_data_2
+      author: system
+      changes:
+        - insert:
+            tableName: question
+            columns:
+              - column:
+                  name: id
+                  valueComputed: 2
+              - column:
+                  name: question_title
+                  value: "How often do you go to the gym?"
+              - column:
+                  name: poll_id
+                  value: 1
+              - column:
+                  name: question_type
+                  value: 0
+
+  - changeSet:
+      id: question_table_insert_data_3
+      author: system
+      changes:
+        - insert:
+            tableName: question
+            columns:
+              - column:
+                  name: id
+                  valueComputed: 3
+              - column:
+                  name: question_title
+                  value: "How do you make your transportation payments?"
+              - column:
+                  name: poll_id
+                  value: 2
+              - column:
+                  name: question_type
+                  value: 0
+
+  - changeSet:
+      id: option_table_insert_data_1
+      author: system
+      changes:
+        - insert:
+            tableName: option
+            columns:
+              - column:
+                  name: id
+                  valueComputed: 1
+              - column:
+                  name: option_title
+                  value: "It affects a lot."
+              - column:
+                  name: question_id
+                  value: 1
+  - changeSet:
+      id: option_table_insert_data_2
+      author: system
+      changes:
+        - insert:
+            tableName: option
+            columns:
+              - column:
+                  name: id
+                  valueComputed: 2
+              - column:
+                  name: option_title
+                  value: "It affects a little."
+              - column:
+                  name: question_id
+                  value: 1
+  - changeSet:
+      id: option_table_insert_data_3
+      author: system
+      changes:
+        - insert:
+            tableName: option
+            columns:
+              - column:
+                  name: id
+                  valueComputed: 3
+              - column:
+                  name: option_title
+                  value: "It will not affect at all."
+              - column:
+                  name: question_id
+                  value: 1
+
+  - changeSet:
+      id: option_table_insert_data_4
+      author: system
+      changes:
+        - insert:
+            tableName: option
+            columns:
+              - column:
+                  name: id
+                  valueComputed: 4
+              - column:
+                  name: option_title
+                  value: "Always."
+              - column:
+                  name: question_id
+                  value: 2
+  - changeSet:
+      id: option_table_insert_data_5
+      author: system
+      changes:
+        - insert:
+            tableName: option
+            columns:
+              - column:
+                  name: id
+                  valueComputed: 5
+              - column:
+                  name: option_title
+                  value: "Sometimes."
+              - column:
+                  name: question_id
+                  value: 2
+  - changeSet:
+      id: option_table_insert_data_6
+      author: system
+      changes:
+        - insert:
+            tableName: option
+            columns:
+              - column:
+                  name: id
+                  valueComputed: 6
+              - column:
+                  name: option_title
+                  value: "Never."
+              - column:
+                  name: question_id
+                  value: 2
+  - changeSet:
+      id: option_table_insert_data_7
+      author: system
+      changes:
+        - insert:
+            tableName: option
+            columns:
+              - column:
+                  name: id
+                  valueComputed: 7
+              - column:
+                  name: option_title
+                  value: "Cash."
+              - column:
+                  name: question_id
+                  value: 3
+
+  - changeSet:
+      id: option_table_insert_data_8
+      author: system
+      changes:
+        - insert:
+            tableName: option
+            columns:
+              - column:
+                  name: id
+                  valueComputed: 8
+              - column:
+                  name: option_title
+                  value: "Credit card."
+              - column:
+                  name: question_id
+                  value: 3
+
+  - changeSet:
+      id: response_table_insert_data_1
+      author: system
+      changes:
+        - insert:
+            tableName: response
+            columns:
+              - column:
+                  name: id
+                  valueComputed: 1
+              - column:
+                  name: user_id
+                  value: 2
+              - column:
+                  name: question_id
+                  value: 1
+              - column:
+                  name: response
+                  value: "[1, 2]"
