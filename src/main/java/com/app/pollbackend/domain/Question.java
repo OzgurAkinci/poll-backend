@@ -31,19 +31,23 @@ public class Question extends Auditable<String>{
 	private String questionTitle;
 
     @ManyToOne
-    @JoinColumn(name = "poll_id", insertable = false, updatable = false)
-    @JsonBackReference(value="poll_questions")
+    @JoinColumn(name = "poll_id")
+    //@JsonBackReference(value="poll_questions")
+    @JsonIgnoreProperties({"questions"})
     private Poll poll;
 
     @Column(name = "question_type")
     private Integer questionType;
 
-    @OneToMany(mappedBy = "question")
+    @OneToMany(mappedBy = "question", orphanRemoval = true)
+    //@JsonManagedReference(value="question_options")
+    @JsonIgnoreProperties({"question"})
     @Fetch(value = FetchMode.SUBSELECT)
     private Collection<Option> options = new ArrayList<>();
 
-    @OneToMany(mappedBy = "question")
-    @JsonManagedReference(value="question_responses")
+    @OneToMany(mappedBy = "question", orphanRemoval = true)
+    //@JsonManagedReference(value="question_responses")
+    @JsonIgnoreProperties({"question"})
     @Fetch(value = FetchMode.SUBSELECT)
     private Collection<Response> responses = new ArrayList<>();
 }

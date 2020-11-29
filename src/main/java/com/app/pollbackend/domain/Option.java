@@ -1,6 +1,8 @@
 package com.app.pollbackend.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,6 +28,7 @@ public class Option extends Auditable<String>{
 
     @ManyToOne
     @JoinColumn(name = "question_id")
-    @JsonIgnoreProperties({"options"})
+    //@JsonBackReference(value="question_options")
+    @JsonIgnoreProperties({"options", "responses"})
     private Question question;
 }

@@ -39,7 +39,7 @@ public class Response extends Auditable<String>{
 
     @ManyToOne
     @JoinColumn(name = "question_id", insertable = false, updatable = false)
-    @JsonBackReference(value="question_responses")
+    //@JsonBackReference(value="question_responses")
     private Question question;
 
     @Type(type = "jsonb")

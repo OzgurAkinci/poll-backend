@@ -30,9 +30,9 @@ public class Poll extends Auditable<String> implements Serializable {
 	@Column(name="poll_title")
 	private String pollTitle;
 
-    @OneToMany(mappedBy = "poll", fetch = FetchType.EAGER)
-    @JsonManagedReference(value="poll_questions")
-    @JsonIgnoreProperties({"options","responses"})
+    @OneToMany(mappedBy = "poll", fetch = FetchType.EAGER, orphanRemoval = true)
+    //@JsonManagedReference(value="poll_questions")
+    @JsonIgnoreProperties({"options","responses", "poll"})
     @Fetch(value = FetchMode.SUBSELECT)
     private Collection<Question> questions = new ArrayList<>();
 }
