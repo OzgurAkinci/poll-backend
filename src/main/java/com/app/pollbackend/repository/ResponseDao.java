@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
+
 @RepositoryRestResource
 public interface ResponseDao extends JpaRepository<Response, Integer>{
 	@Query("SELECT count(id) FROM Response")
@@ -16,5 +17,8 @@ public interface ResponseDao extends JpaRepository<Response, Integer>{
 
 	@Query(value = "select count(id) from response WHERE user_id=:userId and question_id=:questionId and response @> CAST(:optionId as jsonb)", nativeQuery = true)
 	Integer getCountByOptionIdAndUserIdAndQuestionId(@Param("userId") Integer userId, @Param("questionId") Integer questionId, @Param("optionId") String optionId) throws Exception;
-}	
+
+	@Query("SELECT e FROM Response e WHERE e.question.id = :questionId and e.user.id = :userId")
+	Response findByQuestionIdAndUserId(@Param("questionId") Integer questionId, @Param("userId") Integer userId);
+}
 

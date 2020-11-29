@@ -1,14 +1,15 @@
 package com.app.pollbackend.rest;
 
 import com.app.pollbackend.config.security.CustomUserDetails;
-import com.app.pollbackend.domain.Option;
-import com.app.pollbackend.domain.Poll;
-import com.app.pollbackend.domain.Question;
-import com.app.pollbackend.domain.SUser;
+import com.app.pollbackend.domain.*;
 import com.app.pollbackend.dto.JoinResultOption;
 import com.app.pollbackend.dto.JoinResultQuestion;
 import com.app.pollbackend.repository.AppDao;
+import net.minidev.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
@@ -52,6 +53,38 @@ public class JoinController {
 			jrqs.add(jrq);
 		}
 		return jrqs;
+	}
+
+	@PostMapping("/save")
+	ResponseEntity<?> save(@RequestBody List<JoinResultQuestion> jrqs) {
+		OAuth2Authentication oAuth2Authentication = (OAuth2Authentication) SecurityContextHolder.getContext().getAuthentication();
+		UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = (UsernamePasswordAuthenticationToken) oAuth2Authentication.getUserAuthentication();
+		CustomUserDetails customUserDetails = (CustomUserDetails) usernamePasswordAuthenticationToken.getPrincipal();
+		SUser suser= appDao.getUserDao().findUserByUserName(customUserDetails.getUsername());
+
+		for(int i=0; i<jrqs.size(); i++) {
+			JoinResultQuestion jrq = jrqs.get(i);
+			List<JoinResultOption> jros = jrq.getOptions();
+			JSONArray selectedOptions = new JSONArray();
+			for(int j=0; j<jros.size(); j++) {
+				JoinResultOption jro = jros.get(j);
+				if(jro.getSelected()) {
+					selectedOptions.add(jro.getOptionId());
+				}
+			}
+			Response response = appDao.getResponseDao().findByQuestionIdAndUserId(jrq.getQuestionId(), suser.getId());
+			if(response != null){
+				response.setResponse(selectedOptions.toJSONString());
+				appDao.getResponseDao().save(response);
+			}else {
+				Response newResponse = new Response();
+				newResponse.setUser(suser);
+				newResponse.setQuestion(appDao.getQuestionDao().findById(jrq.getQuestionId()).get());
+				newResponse.setResponse(selectedOptions.toJSONString());
+				appDao.getResponseDao().save(newResponse);
+			}
+		}
+		return new ResponseEntity<>(jrqs, HttpStatus.CREATED);
 	}
 
 }
