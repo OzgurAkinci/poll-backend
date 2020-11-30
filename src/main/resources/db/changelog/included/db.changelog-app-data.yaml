@@ -45,7 +45,7 @@ databaseChangeLog:
                   value: 1
               - column:
                   name: question_type
-                  value: 0
+                  value: 1
 
   - changeSet:
       id: question_table_insert_data_2
