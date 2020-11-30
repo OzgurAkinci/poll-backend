@@ -26,5 +26,6 @@ docker run -d --network poll-network --name poll-backend-container -p 8183:8182 
 http://localhost:8183/poll-backend/oauth/token
 username: ozgurakinci
 password: 2
+grant_type: password
 ```
 
