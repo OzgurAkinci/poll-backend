@@ -25,7 +25,11 @@ docker run -d --network poll-network --name poll-backend-container -p 8183:8182 
 ```bash	
 http://localhost:8183/poll-backend/oauth/token
 grant_type: password
-username: ozgurakinci
+
+username: ozgurakinci (ADMIN, END)
+password: 2
+
+username: enduser (END)
 password: 2
 ```
 
